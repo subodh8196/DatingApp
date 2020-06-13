@@ -4,6 +4,33 @@
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
+   {
+       "name": "(gdb) Bash on Windows Attach",
+       "type": "cppdbg",
+       "request": "attach",
+       "program": "enter program name, for example ${workspaceFolder}/a.exe",
+       "processId": "${command:pickRemoteProcess}",
+       "pipeTransport": {
+           "debuggerPath": "/usr/bin/gdb",
+           "pipeProgram": "${env:windir}\\system32\\bash.exe",
+           "pipeArgs": ["-c"],
+           "pipeCwd": ""
+       },
+       "setupCommands": [
+           {
+               "description": "Enable pretty-printing for gdb",
+               "text": "-enable-pretty-printing",
+               "ignoreFailures": true
+           }
+       ]
+   },
+       
+       {
+           "name": ".NET Core Attach",
+           "type": "coreclr",
+           "request": "attach",
+           "processId": "${command:pickProcess}"
+       },
        
        {
            "name": ".NET Core Attach",
